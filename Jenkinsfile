@@ -6,8 +6,8 @@ pipeline {
         stage("environment preparation"){
 
             steps {
-                sh "sudo apt install nodejs -y"
-                sh "sudo apt install npm -y"
+                sh "apt install nodejs -y"
+                sh "apt install npm -y"
             }
 
         }
