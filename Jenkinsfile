@@ -6,8 +6,9 @@ pipeline {
         stage("environment preparation"){
 
             steps {
-                sh "apt install nodejs -y"
-                sh "apt install npm -y"
+                sh "git branch -v"
+                sh "pwd"
+                sh "${USER}"
             }
 
         }
