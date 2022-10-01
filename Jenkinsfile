@@ -6,8 +6,8 @@ pipeline {
         stage("environment preparation"){
 
             steps {
-                sh "git branch -v"
                 sh "pwd"
+                sh "ls"
                 sh "${USER}"
             }
 
