@@ -20,9 +20,10 @@ pipeline {
             }
 
             steps {
+                sh "pwd"
                 sh 'echo "SSH private key is located at $SSH_CRED"'
 
-                sh "cat ${pwd}/cert/tsp-devops.pem"
+                
                 sh "ls $SSH_CRED"
                 // sh "ssh -i ${pwd}/cert/tsp-devops.pem ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
                 
