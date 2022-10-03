@@ -28,7 +28,16 @@ pipeline {
             }
 
             steps {
-                
+                //=============== THIRD APPROACH
+                script {
+                    sh """
+                    #!/bin/bash
+                    ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com << EOF
+                    curl ifconfig.co
+                    exit 0
+                    << EOF
+                    """
+                }
 
                 // ============== SECOND APPROACH
                 // script {
@@ -48,11 +57,11 @@ pipeline {
                 // }
 
                 // ===========FIRST APPROACH 
-                sh "pwd"
-                sh 'echo "SSH private key is located at $SSH_CRED"'
+                // sh "pwd"
+                // sh 'echo "SSH private key is located at $SSH_CRED"'
                 
-                // sh "ssh -i $SSH_CRED -tt -o StrictHostKeyChecking=no ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
-                sh "ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com $remoteCommands"
+                // // sh "ssh -i $SSH_CRED -tt -o StrictHostKeyChecking=no ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
+                // sh 'ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com $remoteCommands'
                 
             }
         }
