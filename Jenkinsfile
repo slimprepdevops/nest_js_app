@@ -22,19 +22,43 @@ pipeline {
             }
 
             steps {
-                script {
-                     def remote = [
-                        name: 'ubuntu', 
-                        host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', 
-                        user: 'ubuntu', 
-                        identity: "$SSH_CRED", 
-                        allowAnyHosts: true
-                    ]
+                //=============== THIRD APPROACH
+                node {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'git-test-deploy1', usernameVariable: 'PEM_FILE')]) {
+                        def remote = [
+                            name: 'ubuntu', 
+                            host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', 
+                            user: 'ubuntu', 
+                            allowAnyHosts: true,
+                            // identityFile: PEM_FILE,
+                            // identity: PEM_FILE,
+                            knownHosts: PEM_FILE,
+                        ]
+                        
+                        stage("SSH Steps!") {
+                            sshCommand remote: remote, command: "df -h"
+                            sshCommand remote: remote, command: "curl ifconfig.co"
+                        }
+                    }
+                }
+
+                // ============== SECOND APPROACH
+                // script {
+                //      def remote = [
+                //         name: 'ubuntu', 
+                //         host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', 
+                //         user: 'ubuntu', 
+                //         // identityFile: "$SSH_CRED", 
+                //         allowAnyHosts: true,
+                //         knownHosts: SSH_CRED
+                //     ]
                      
-                    //  sshCommand remote: remote, command: "df -h"
-                     sshCommand remote: remote, command: "df -h"
-                     sshCommand remote: remote, command: "curl ifconfig.co"
-                 }
+                //     //  sshCommand remote: remote, command: "df -h"
+                //      sshCommand remote: remote, command: "df -h"
+                //      sshCommand remote: remote, command: "curl ifconfig.co"
+                //  }
+
+                // ===========FIRST APPROACH 
                 // sh "pwd"
                 // sh 'echo "SSH private key is located at $SSH_CRED"'
                 
