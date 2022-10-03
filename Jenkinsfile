@@ -23,7 +23,7 @@ pipeline {
 
             steps {
                 script {
-                     def remote = [name: 'ubuntu', host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', user: 'ubuntu', identityFile: '$SSH_CRED', allowAnyHosts: true]
+                     def remote = [name: 'ubuntu', host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', user: 'ubuntu', identityFile: SSH_CRED, allowAnyHosts: true]
                      
                     //  sshCommand remote: remote, command: "df -h"
                      sshCommand remote: remote, command: "df -h"
