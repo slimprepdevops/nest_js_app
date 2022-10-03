@@ -9,6 +9,8 @@ pipeline {
                 sh "pwd"
                 sh "ls"
                 sh "echo ${USER}"
+                sh "df -h"
+                sh "curl ifconfig.co"
             }
 
         }
@@ -25,7 +27,10 @@ pipeline {
 
                 
                 sh "ls $SSH_CRED"
-                // sh "ssh -i ${pwd}/cert/tsp-devops.pem ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
+                sh "ssh -i $SSH_CRED ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
+                sh "echo ${USER}"
+                sh "df -h"
+                sh "curl ifconfig.co"
                 
             }
 
