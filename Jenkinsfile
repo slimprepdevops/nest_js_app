@@ -26,10 +26,8 @@ pipeline {
                      def remote = [name: 'deploy-vm', host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', user: 'ubuntu', password: SSH_CRED, allowAnyHosts: true]
                      
                     //  sshCommand remote: remote, command: "df -h"
-                     sshCommand remote: remote, command: [
-                        "df -h",
-                        "curl ifconfig.co"
-                    ]
+                     sshCommand remote: remote, command: "df -h"
+                     sshCommand remote: remote, command: "curl ifconfig.co"
                  }
                 // sh "pwd"
                 // sh 'echo "SSH private key is located at $SSH_CRED"'
