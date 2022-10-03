@@ -23,7 +23,7 @@ pipeline {
 
             steps {
                 //=============== THIRD APPROACH
-                node {
+                script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'git-test-deploy1', usernameVariable: 'PEM_FILE')]) {
                         def remote = [
                             name: 'ubuntu', 
@@ -35,12 +35,12 @@ pipeline {
                             knownHosts: PEM_FILE,
                         ]
                         
-                        stage("SSH Steps!") {
-                            sshCommand remote: remote, command: "df -h"
-                            sshCommand remote: remote, command: "curl ifconfig.co"
-                        }
+                        sshCommand remote: remote, command: "df -h"
+                        sshCommand remote: remote, command: "curl fconfig.co"`
                     }
                 }
+
+
 
                 // ============== SECOND APPROACH
                 // script {
@@ -71,6 +71,18 @@ pipeline {
                 
             }
 
+        }
+
+        stage("alternative connect"){
+            steps{
+                script {
+                    sshagent (credentials: ['git-test-deploy1']) {
+                        sh '''
+                            ssh -o StrictHostKeyChecking=no -l ubuntu ec2-35-92-93-35.us-west-2.compute.amazonaws.com uname -a
+                        '''
+                    }
+                }
+            }
         }
     }
 }
