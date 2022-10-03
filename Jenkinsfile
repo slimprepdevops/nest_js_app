@@ -35,6 +35,7 @@ pipeline {
                     ssh -i $SSH_CRED -tt ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com << EOF
                     curl ifconfig.co/ip
                     df -h
+                    echo '$USER'
                     exit 0
                     << EOF
                     """
