@@ -19,6 +19,12 @@ pipeline {
 
             environment { 
                 SSH_CRED = credentials('git-test-deploy1') 
+                remoteCommands =
+                    """
+                        echo ${USER};
+                        df -h;
+                        curl ifconfig.co
+                    """
             }
 
             steps {
@@ -45,23 +51,9 @@ pipeline {
                 sh "pwd"
                 sh 'echo "SSH private key is located at $SSH_CRED"'
                 
-                sh "ls $SSH_CRED"
                 // sh "ssh -i $SSH_CRED -tt -o StrictHostKeyChecking=no ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
-                sh "ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com \ echo ${USER}\ df -h \ curl ifconfig.co"
+                sh "ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com $remoteCommands"
                 
-            }
-
-        }
-
-        stage("alternative connect"){
-            steps{
-                script {
-                    sshagent (credentials: ['git-test-deploy1']) {
-                        sh '''
-                            ssh -o StrictHostKeyChecking=no -l ubuntu ec2-35-92-93-35.us-west-2.compute.amazonaws.com uname -a
-                        '''
-                    }
-                }
             }
         }
     }
