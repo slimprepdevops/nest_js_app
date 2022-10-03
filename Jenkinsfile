@@ -36,7 +36,7 @@ pipeline {
                         ]
                         
                         sshCommand remote: remote, command: "df -h"
-                        sshCommand remote: remote, command: "curl fconfig.co"`
+                        sshCommand remote: remote, command: "curl fconfig.co"
                     }
                 }
 
