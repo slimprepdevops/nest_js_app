@@ -22,16 +22,24 @@ pipeline {
             }
 
             steps {
-                sh "pwd"
-                sh 'echo "SSH private key is located at $SSH_CRED"'
-
+                script {
+                     def remote = [name: 'deploy-vm', host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', user: 'ubuntu', password: SSH_CRED, allowAnyHosts: true]
+                     
+                    //  sshCommand remote: remote, command: "df -h"
+                     sshCommand remote: remote, command: [
+                        "df -h",
+                        "curl ifconfig.co"
+                    ]
+                 }
+                // sh "pwd"
+                // sh 'echo "SSH private key is located at $SSH_CRED"'
                 
-                sh "ls $SSH_CRED"
-                // sh "ssh -i $SSH_CRED -tt -o StrictHostKeyChecking=no ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
-                sh "ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
-                sh "echo ${USER}"
-                sh "df -h"
-                sh "curl ifconfig.co"
+                // sh "ls $SSH_CRED"
+                // // sh "ssh -i $SSH_CRED -tt -o StrictHostKeyChecking=no ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
+                // sh "ssh -i $SSH_CRED -t ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com"
+                // sh "echo ${USER}"
+                // sh "df -h"
+                // sh "curl ifconfig.co"
                 
             }
 
