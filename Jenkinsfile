@@ -19,12 +19,13 @@ pipeline {
 
             environment { 
                 SSH_CRED = credentials('git-test-deploy1') 
+                USERNAME = "ubuntu"
             }
 
             steps {
                 //=============== THIRD APPROACH
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'git-test-deploy1', usernameVariable: 'PEM_FILE')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'git-test-deploy1', usernameVariable: 'pemfile')]) {
                         def remote = [
                             name: 'ubuntu', 
                             host: 'ec2-35-92-93-35.us-west-2.compute.amazonaws.com', 
@@ -32,7 +33,7 @@ pipeline {
                             allowAnyHosts: true,
                             // identityFile: PEM_FILE,
                             // identity: PEM_FILE,
-                            knownHosts: PEM_FILE,
+                            knownHosts: pemfile,
                         ]
                         
                         sshCommand remote: remote, command: "df -h"
