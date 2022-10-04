@@ -30,6 +30,7 @@ pipeline {
                     df -h
                     echo \${USER}
                     sudo apt update
+                    
                     exit 0
                     << EOF
                     """
