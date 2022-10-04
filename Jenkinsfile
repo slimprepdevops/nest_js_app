@@ -10,6 +10,7 @@ pipeline {
                 sh "echo ${USER}"
                 sh "df -h"
                 sh "curl ifconfig.co"
+                sh "sudo apt update -q"
             }
         }
 
@@ -28,8 +29,8 @@ pipeline {
                     ssh -i $SSH_CRED -tt -v ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com << EOF
                     curl ifconfig.co/ip
                     df -h
-                    echo '\$'{USER}
-                    
+                    echo 'echo ${USER}'
+                    sudo apt update
                     exit 0
                     << EOF
                     """
