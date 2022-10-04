@@ -4,7 +4,6 @@ pipeline {
 
     stages {
         stage("environment preparation"){
-
             steps {
                 sh "pwd"
                 sh "ls"
@@ -12,19 +11,13 @@ pipeline {
                 sh "df -h"
                 sh "curl ifconfig.co"
             }
-
         }
 
         stage("connect to deploy server"){
 
             environment { 
-                SSH_CRED = credentials('git-test-deploy1') 
-                remoteCommands =
-                    """
-                        echo ${USER};
-                        df -h;
-                        curl ifconfig.co
-                    """
+                SSH_CRED = credentials('git-test-deploy1')
+                REM_USER = "USER"
             }
 
             steps {
@@ -35,7 +28,7 @@ pipeline {
                     ssh -i $SSH_CRED -tt ubuntu@ec2-35-92-93-35.us-west-2.compute.amazonaws.com << EOF
                     curl ifconfig.co/ip
                     df -h
-                    echo '$USER'
+                    echo ${$REM_USER}
                     exit 0
                     << EOF
                     """
