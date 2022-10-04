@@ -29,6 +29,7 @@ pipeline {
                     curl ifconfig.co/ip
                     df -h
                     echo \${USER}
+                    sudo apt update
                     exit 0
                     << EOF
                     """
