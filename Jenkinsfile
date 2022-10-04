@@ -10,6 +10,7 @@ pipeline {
                 sh "echo ${USER}"
                 sh "df -h"
                 sh "curl ifconfig.co"
+                sh "echo testing"
                 sh "sudo apt update -q"
             }
         }
