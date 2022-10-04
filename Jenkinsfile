@@ -29,7 +29,7 @@ pipeline {
                     curl ifconfig.co/ip
                     df -h
                     echo '\$' 
-                    sudo apt update -q
+                    sudo apt update -y -q
                     exit 0
                     << EOF
                     """
