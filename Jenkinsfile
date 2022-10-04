@@ -30,7 +30,6 @@ pipeline {
                     df -h
                     echo '\$' 
                     sudo apt update -q
-
                     exit 0
                     << EOF
                     """
