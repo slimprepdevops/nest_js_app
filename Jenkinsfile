@@ -38,6 +38,7 @@ pipeline {
                 }
 
                 // ============== SECOND APPROACH
+                
                 // script {
                 //     def remote = [
                 //         name: 'ubuntu', 
