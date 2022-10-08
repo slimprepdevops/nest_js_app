@@ -50,7 +50,7 @@ pipeline {
                     sudo npm install -y
 
                     echo "Building project"
-                    yarn build
+                    sudo yarn build
 
                     echo "changing directory"
                     cd dist
