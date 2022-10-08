@@ -46,7 +46,7 @@ pipeline {
                     echo "installing project"
                     sudo mkdir app
                     cd app
-                    git clone https://github.com/slimprepdevops/nest_js_app.git .
+                    sudo git clone https://github.com/slimprepdevops/nest_js_app.git .
                     npm install -y
 
                     echo "Building project"
