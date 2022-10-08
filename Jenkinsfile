@@ -47,7 +47,7 @@ pipeline {
                     sudo mkdir app
                     cd app
                     sudo git clone https://github.com/slimprepdevops/nest_js_app.git .
-                    npm install -y
+                    sudo npm install -y
 
                     echo "Building project"
                     yarn build
@@ -56,7 +56,7 @@ pipeline {
                     cd dist
 
                     echo "starting project in directory"
-                    pm2 start main.js
+                    sudo pm2 start main.js
 
                     echo "list running apps"
                     pm2 list
