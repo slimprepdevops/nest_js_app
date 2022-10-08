@@ -32,7 +32,7 @@ pipeline {
                     df -h
                     sudo mkdir build
                     cd build
-                    git clone https://github.com/slimprepdevops/nest_js_app.git .
+                    sudo git clone https://github.com/slimprepdevops/nest_js_app.git .
                     git checkout jenkins
                     chmod 777 deploy/build.sh
                     .deploy/build.sh
