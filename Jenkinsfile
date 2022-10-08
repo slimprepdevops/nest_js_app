@@ -44,6 +44,9 @@ pipeline {
                     sudo npm install pm2 -g
 
                     echo "installing project"
+                    sudo mkdir app
+                    cd app
+                    git clone https://github.com/slimprepdevops/nest_js_app.git .
                     npm install -y
 
                     echo "Building project"
