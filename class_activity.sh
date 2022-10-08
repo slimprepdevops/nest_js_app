@@ -1,3 +1,4 @@
 cd dist
-pm2 list
+sudo pm2 start main.js
+pm2 save
 
