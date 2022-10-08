@@ -17,7 +17,7 @@ pipeline {
         stage("connect to deploy server"){
 
             environment { 
-                SSH_CRED = credentials('git-test-deploy1')
+                SSH_CRED = credentials('deploy-test-pem')
                 REM_USER = "{USER}"
             }
 
